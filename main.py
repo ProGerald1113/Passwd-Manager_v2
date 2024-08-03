@@ -10,17 +10,18 @@ key = Fernet.generate_key()
 
 f = Fernet(key)
 
-
 running = True
 
 while running:
+
     print("Welcome to your password manager!")
     print("Are you a returning user or a new user?")
-    user = input("Please press y if you are a new user ,But if you are a returning user press n:")
+    print("Press 1 if your are a new user \nPress 2 if you are a returning user.")
+    user = input("Enter:")
 
-    if user == "Y" or user == "y":
+    if user == "1":
         username= input("Create Username:")
-        password = p = getpass.getpass(prompt="Set/Enter a password:")
+        password = getpass.getpass(prompt="Set/Enter a password:")
         
         print("Done!")
 
@@ -28,13 +29,11 @@ while running:
         sha256.update(password.encode())
         hashed_passwd = sha256.hexdigest()
 
-        write_passwd(hashed_passwd,dir_obj)
+        write_passwd(hashed_passwd,username)
 
-        
 
         running = False
     
 
-    
     else:
         pass
