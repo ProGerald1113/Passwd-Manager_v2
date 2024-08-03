@@ -1,13 +1,14 @@
 from cryptography.fernet import Fernet 
-from funcs import username_dir
+from funcs import *
 import getpass
 import os 
+import hashlib
 
+sha256 = hashlib.sha256()
 
 key = Fernet.generate_key()
 
 f = Fernet(key)
-
 
 
 running = True
@@ -20,7 +21,16 @@ while running:
     if user == "Y" or user == "y":
         username= input("Create Username:")
         password = p = getpass.getpass(prompt="Set/Enter a password:")
-        username_dir(username)
+        
+        print("Done!")
+
+        dir_obj = username_dir(username)
+        sha256.update(password.encode())
+        hashed_passwd = sha256.hexdigest()
+
+        write_passwd(hashed_passwd,dir_obj)
+
+        
 
         running = False
     
