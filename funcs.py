@@ -29,17 +29,29 @@ def write_passwd(passwd,username):
         print("error")
 
 
-def correct_passwd(username, passwd):
-    path = f"Passwd-Manager_v2/{username}"
+def correct_or_not(username, passwd):
+    
+    sha256.update(passwd.encode())
+    passwd = sha256.hexdigest()
+
+
+    Correct = True
+
+    path = f"home/browngerald2008/Passwd-Manager_v2/{username}"
+
     file = "passwd.txt"
     os.chdir(path)
 
-    if os.path.exists(file):
-        with open(file, "rb") as f:
-            real_passwd = f.read()
-            
+    with open(file, "rb") as f:
+        real_passwd = f.read()
+    
+    if real_passwd != passwd or not os.path.exists(path):
+        print("One or both of the details you entered are wrong please double check")
 
+    else:
+        print("Correct!")
 
+correct_or_not("Gee", "Gee")
 
     
 
