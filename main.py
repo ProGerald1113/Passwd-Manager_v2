@@ -16,8 +16,11 @@ while running:
 
     print("Welcome to your password manager!")
     print("Are you a returning user or a new user?")
+    print("----------------------------------------------------------------------------------------------------")
     print("Press 1 if your are a new user \nPress 2 if you are a returning user.")
+    
     user = input("Enter:")
+
 
     if user == "1":
         username= input("Create Username:")
@@ -25,15 +28,17 @@ while running:
         
         print("Done!")
 
-        dir_obj = username_dir(username)
-        sha256.update(password.encode())
-        hashed_passwd = sha256.hexdigest()
 
-        write_passwd(hashed_passwd,username)
+        write_passwd(password,username)
 
 
         running = False
     
 
-    else:
-        pass
+    elif user == "2":
+        
+        username_check = input("Enter your username:")
+        passwd_check = input("Enter your password:")
+
+            
+
