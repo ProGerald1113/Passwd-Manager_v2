@@ -40,5 +40,4 @@ while running:
         username_check = input("Enter your username:")
         passwd_check = input("Enter your password:")
 
-            
-
+        correct_or_not(username_check,passwd_check)
