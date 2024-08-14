@@ -1,5 +1,7 @@
 import os
 import hashlib
+import sys
+
 
 sha256 = hashlib.sha256()
 
@@ -29,31 +31,42 @@ def write_passwd(passwd,username):
         print("error")
 
 
-def correct_or_not(username, passwd):
+def correct_user(username):
+    
+    path = f"/home/browngerald2008/Passwd-Manager_v2/{username}"
+    
+    os.chdir(path)
+    
+    if os.path.exists(path):
+        print("This user exists")
+        print("----------------------------------------------------------------------------------------------------")
+    
+    else:
+        print("Incorrect!!!!")
+        print("----------------------------------------------------------------------------------------------------")
+        sys.exit()
+        
+def passwd_correct(passwd):
+    
+    file = "passwd.txt"
+    sha256 = hashlib.sha256()
     
     sha256.update(passwd.encode())
-    passwd = sha256.hexdigest()
-
-
-    Correct = True
-
-    path = f"home/browngerald2008/Passwd-Manager_v2/{username}"
-
-    file = "passwd.txt"
-    os.chdir(path)
-
-    with open(file, "rb") as f:
-        real_passwd = f.read()
     
-    if real_passwd != passwd or not os.path.exists(path):
-        print("One or both of the details you entered are wrong please double check")
+    hashed_passwd = sha256.hexdigest()
+    
+    with open(file, "r") as file:
+        real_passwd = file.read()
+        
+    if real_passwd == hashed_passwd:
+        print("Your password is correct!")
+        print("----------------------------------------------------------------------------------------------------")
 
+        
     else:
-        print("Correct!")
+        print("ITS WRONG!")
+        print("----------------------------------------------------------------------------------------------------")
 
-correct_or_not("Gee", "Gee")
-
+        sys.exit()
     
-
-
-
+        
