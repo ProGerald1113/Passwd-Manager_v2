@@ -16,8 +16,10 @@ while running:
 
     print("Welcome to your password manager!")
     print("Are you a returning user or a new user?")
+    
     print("----------------------------------------------------------------------------------------------------")
-    print("Press 1 if your are a new user \nPress 2 if you are a returning user.")
+    
+    print("Press 1 if your are a new user \nPress 2 if you are a returning user.\nPress 3 to quit.")
     
     user = input("Enter:")
 
@@ -32,12 +34,14 @@ while running:
         write_passwd(password,username)
 
 
-        running = False
-    
-
     elif user == "2":
         
         username_check = input("Enter your username:")
+        correct_user(username_check)
+        
         passwd_check = input("Enter your password:")
-
-        correct_or_not(username_check,passwd_check)
+        passwd_correct(passwd_check)
+    
+    elif user == "3":
+        print("Thanks for using the password manager v2 please come again")
+        running = False
